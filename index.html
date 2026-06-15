@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Trang Trại Thông Minh của Thiện</title>
+    <title>Dashboard Trang Trại Thông Minh</title>
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
@@ -17,9 +17,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: white;
         }
 
-        h1 { color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-bottom: 30px; text-align: center; }
+        h1 { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-bottom: 10px; text-align: center; }
+
+        #clock { 
+            font-size: 18px; 
+            margin-bottom: 30px; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+            background: rgba(0,0,0,0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
 
         .container { 
             display: flex;
@@ -38,7 +48,6 @@
             text-align: center; 
             backdrop-filter: blur(5px);
             transition: transform 0.3s;
-            /* Đặt chiều rộng tối thiểu để thẻ không quá bé trên điện thoại */
             flex: 1 1 150px; 
             max-width: 200px;
         }
@@ -48,7 +57,6 @@
         .value { font-size: 24px; font-weight: bold; color: #ffffff; margin-top: 10px; }
         .label { color: #e0e0e0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Tinh chỉnh cho màn hình điện thoại rất nhỏ */
         @media (max-width: 480px) {
             h1 { font-size: 20px; }
             .card { padding: 15px; }
@@ -58,6 +66,7 @@
 <body>
 
     <h1>Giám sát Trang trại Thông minh</h1>
+    <div id="clock">Đang tải thời gian...</div>
     
     <div class="container">
         <div class="card">
@@ -81,6 +90,19 @@
             <div class="value" id="rain">Không</div>
         </div>
     </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('vi-VN', options);
+            const timeString = now.toLocaleTimeString('vi-VN');
+            document.getElementById('clock').innerHTML = dateString + " | " + timeString;
+        }
+        
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
 
 </body>
 </html>
